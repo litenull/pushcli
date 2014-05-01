@@ -1,0 +1,17 @@
+{
+  "name": "pushserver",
+  "description": "A simple push server",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.1.x"
+  },
+  "dependencies": {
+    "optimist": "0.6.1",
+    "apns": "0.1.0"
+  },
+  "devDependencies": {
+  },
+  "license": "proprietary, all rights reserved."
+}

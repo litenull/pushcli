@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "optimist": "0.6.1",
-    "apns": "0.1.0"
+    "apns": "0.1.0",
+    "gcm": "1.0.1"
   },
   "devDependencies": {
   },

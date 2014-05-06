@@ -34,8 +34,10 @@ var api = {
       var message = {
         registration_id: token, // required
         collapse_key: 'Collapse key', 
-          'data.key1': 'value1',
-          'data.key2': 'value2'
+        'data.key1': 'value1',
+        'data.key2': 'value2',
+        "delay_while_idle" : true,
+        "data.message": msg
       };
 
       gcm.send(message, function(err, messageId){

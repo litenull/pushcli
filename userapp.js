@@ -2,7 +2,7 @@ var UserApp = require('userapp');
 var secrets = require('./userapp_config').secrets;
 var api = require('./lib').api;
 var util = require('util');
-var Q = require("q");
+var async = require('async');
 var argv = require('optimist')
     .usage('Usage: $0 --priority [int]')
     .demand(['priority'])
@@ -31,14 +31,14 @@ UserApp.User.search({
         var props = user.properties;
         var device_type = props.device_type.value;
         var device_id = props.device_id.value;
-        return function() {
-            api[device_type].sendpush("Time for your check-in", device_id);
+        return function(callback) {
+            api[device_type].sendpush("Time for your check-in", device_id, function() {
+                callback();
+            });
         }
     });
 
-    //calls each notify call sequentially
-    //see: https://github.com/kriskowal/q#sequences
-    notifyFuncs.reduce(Q.when, Q(''));
-
+    console.log(notifyFuncs);
+    async.series(notifyFuncs);
 });
 

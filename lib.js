@@ -1,9 +1,7 @@
-var Q = require('q');
 var apns = require('apns');
 var GCM = require('gcm').GCM;
 var config = require('./config').options;
 var options, notification;
-
 
 options = {
    keyFile : config.keyFile,
@@ -24,21 +22,24 @@ connection = new apns.Connection(options);
 
 var api = {
   ios: {
-    sendpush: function(msg, token) {
-      var deferred = Q.defer();      
+    sendpush: function(msg, token, callback) {
+      if (typeof callback === 'undefined') {
+        callback = function() {};
+      }
       notification = new apns.Notification();
       notification.device = new apns.Device(token);
       notification.alert = msg;
       connection.sendNotification(notification);
       process.nextTick(function() {
-        deferred.resolve();
+        callback({'success': 'ios msg sent'});
       });
-      return deferred.promise;
     }
   },
   android: {
-    sendpush: function(msg, token) {
-      var deferred = Q.defer();
+    sendpush: function(msg, token, callback) {
+      if (typeof callback === 'undefined') {
+        callback = function() {};
+      }
       var message = {
         registration_id: token, // required
         collapse_key: 'Collapse key', 
@@ -48,16 +49,22 @@ var api = {
         "data.message": msg
       };
 
+            
+      // setTimeout(function() {
+      //   console.log("fake sending " + msg + " to " + token);
+      //   callback({'success': 'fake sent'});
+      // }, 2500);
+      
+     
       gcm.send(message, function(err, messageId){
         if (err) {
           console.log(err);
-          deferred.reject(err);
-        } else {
+          callback({'error': err});
+          } else {
+          callback({'success': messageId});
           console.log("Sent with message ID: ", messageId);
-          deferred.resolve(messageId);
         }
       });
-      return deferred.promise;
     }
   }
 }

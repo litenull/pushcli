@@ -1,0 +1,5 @@
+
+exports.secrets = {
+    app_id: '<Your Userapp App Id>',
+    token: '<Your Userapp API Token>'
+}

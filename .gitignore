@@ -1,3 +1,4 @@
 PushChatCert.pem
 PushChatKey.pem
 node_modules
+config,js

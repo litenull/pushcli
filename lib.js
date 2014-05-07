@@ -1,16 +1,18 @@
 var apns = require('apns');
 var GCM = require('gcm').GCM;
+var config = require('./config').options;
 var options, notification;
 
+
 options = {
-   keyFile : "PushChatKey.pem",
-   certFile : "PushChatCert.pem",
-   gateway: 'gateway.sandbox.push.apple.com',
+   keyFile : config.keyFile,
+   certFile : config.certFile,
+   gateway: config.gateway,
    errorCallback: error,
    debug : true
 };
 
-var apiKey = '';
+var apiKey = config.apiKey;
 var gcm = new GCM(apiKey);
 
 var error = function(error) {

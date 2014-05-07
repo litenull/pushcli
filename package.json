@@ -12,7 +12,6 @@
     "async": "^0.8.0",
     "gcm": "1.0.1",
     "optimist": "0.6.1",
-    "q": "^1.0.1"
   },
   "devDependencies": {},
   "license": "proprietary, all rights reserved."

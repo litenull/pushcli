@@ -18,6 +18,7 @@ UserApp.User.search({
     "page_size": 250,
     "fields": "*"
 }, function(error, result){
+
     var usersToNotify = result.items.filter(function(user) {
         console.log(user.properties.frequency.value);
         if (priority <= parseInt(user.properties.frequency.value)) {
@@ -35,10 +36,9 @@ UserApp.User.search({
         }
     });
 
-    //FIXME!! this needs to execute each function sequentially using .then() or so
-    notifyFuncs.forEach(function(f) {
-        f();
-    });
+    //calls each notify call sequentially
+    //see: https://github.com/kriskowal/q#sequences
+    notifyFuncs.reduce(Q.when, Q(''));
 
 });
 

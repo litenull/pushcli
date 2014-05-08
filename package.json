@@ -11,7 +11,8 @@
     "apns": "0.1.0",
     "async": "^0.8.0",
     "gcm": "1.0.1",
-    "optimist": "0.6.1"
+    "optimist": "0.6.1",
+    "userapp": "0.2.3"
   },
   "devDependencies": {},
   "license": "proprietary, all rights reserved."

@@ -31,8 +31,9 @@ UserApp.User.search({
         var props = user.properties;
         var device_type = props.device_type.value;
         var device_id = props.device_id.value;
-        if (device_type in ['android', 'ios'] && device_id) {
+        if ((device_type == 'android' || device_type == 'ios') && device_id) {
             return function(callback) {
+                console.log("sending to " + device_id);
                 api[device_type].sendpush("Time for your check-in", device_id, function() {
                     callback();
                 });

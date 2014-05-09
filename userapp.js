@@ -20,8 +20,8 @@ UserApp.User.search({
 }, function(error, result){
 
     var usersToNotify = result.items.filter(function(user) {
-        console.log(user.properties.frequency.value);
-        if (priority <= parseInt(user.properties.frequency.value)) {
+        console.log(user.properties.reminder_frequency.value);
+        if (priority <= parseInt(user.properties.reminder_frequency.value)) {
             return user;
         }
     });

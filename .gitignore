@@ -1,4 +1,4 @@
-PushChatCert.pem
-PushChatKey.pem
+*.pem
 node_modules
-config,js
+*config.js
+

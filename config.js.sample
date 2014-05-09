@@ -3,5 +3,6 @@ exports.options = {
     apiKey: '<GCM API Key>', //replace with your API key
     keyFile: 'PushChatKey.pem', //path to key file
     certFile: 'PushChatCert.pem', //path to cert file
+    passphrase: 'super secret passphrase', // PEM passphrase
     gateway: 'gateway.sandbox.push.apple.com' //ios gateway
 }

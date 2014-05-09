@@ -6,6 +6,7 @@ var options, notification;
 options = {
    keyFile : config.keyFile,
    certFile : config.certFile,
+   passphrase: config.passphrase,
    gateway: config.gateway,
    errorCallback: error,
    debug : true

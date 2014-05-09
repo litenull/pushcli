@@ -31,10 +31,16 @@ UserApp.User.search({
         var props = user.properties;
         var device_type = props.device_type.value;
         var device_id = props.device_id.value;
-        return function(callback) {
-            api[device_type].sendpush("Time for your check-in", device_id, function() {
+        if (device_type in ['android', 'ios'] && device_id) {
+            return function(callback) {
+                api[device_type].sendpush("Time for your check-in", device_id, function() {
+                    callback();
+                });
+            }
+        } else {
+            return function(callback) {
                 callback();
-            });
+            }
         }
     });
 

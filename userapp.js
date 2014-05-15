@@ -69,7 +69,7 @@ var sendNotifications = function(cb) {
 
 if (background) {
         var priority = 1;
-        var j = schedule.scheduleJob('0 18,19,20 * * *', function(){
+        var j = schedule.scheduleJob('0 10,15,20 * * *', function(){
             sendNotifications(function() {
                 console.log('Sending notifications with priority ' + priority);
                 priority++;

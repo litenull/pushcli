@@ -3,6 +3,10 @@ var GCM = require('gcm').GCM;
 var config = require('./config').options;
 var options, notification;
 
+var error = function(error) {
+  console.log('ERROR ' + error)
+}
+
 options = {
    keyFile : config.keyFile,
    certFile : config.certFile,
@@ -15,10 +19,6 @@ options = {
 var apiKey = config.apiKey;
 var gcm = new GCM(apiKey);
 
-var error = function(error) {
-  console.log(error)
-}
-
 connection = new apns.Connection(options);
 
 var api = {
@@ -30,7 +30,11 @@ var api = {
       notification = new apns.Notification();
       notification.device = new apns.Device(token);
       notification.alert = msg;
-      connection.sendNotification(notification);
+      try {
+        connection.sendNotification(notification);
+      } catch(e) {
+        console.log('ERROR ' + e.toString())
+      }
       process.nextTick(function() {
         callback({'success': 'ios msg sent'});
       });
